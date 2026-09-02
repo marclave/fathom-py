@@ -38,9 +38,9 @@ Complete reference of every operation, grouped by resource. See [the README](./R
 ```python
 import os
 
-from fathom_analytics import FathomAnalyticsAPI
+from fathom_analytics import fathom
 
-client = FathomAnalyticsAPI(
+client = fathom(
     bearer_auth=os.environ.get("BEARER_AUTH"),
 )
 ```
