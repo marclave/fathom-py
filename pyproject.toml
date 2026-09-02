@@ -1,6 +1,6 @@
 [project]
 name = "fathom-analytics"
-version = "0.2.0" # x-release-please-version
+version = "0.3.0" # x-release-please-version
 description = "Use the API to manage sites, events and milestones, or pull custom reports. The base URL is https://api.usefathom.com/v1."
 readme = "README.md"
 license = "Apache-2.0"
