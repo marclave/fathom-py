@@ -14,11 +14,11 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any, Callable, TypedDict
 
-from fathom_analytics import FathomAnalyticsAPI
+from fathom_analytics import fathom
 
 # The shared smoke-test runner injects base URL and credentials through the same
 # environment variables the generated client reads in normal use.
-client = FathomAnalyticsAPI(max_retries=0, timeout=30)
+client = fathom(max_retries=0, timeout=30)
 
 
 class SmokeResult(TypedDict, total=False):

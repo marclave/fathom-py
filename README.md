@@ -35,9 +35,9 @@ pip install fathom-analytics
 ```python
 import os
 
-from fathom_analytics import FathomAnalyticsAPI
+from fathom_analytics import fathom
 
-client = FathomAnalyticsAPI(
+client = fathom(
     bearer_auth=os.environ.get("BEARER_AUTH"),
 )
 
@@ -52,16 +52,16 @@ See the [API reference](./api.md) for every available operation.
 
 ## Async
 
-Every client has an `Async` counterpart (`AsyncFathomAnalyticsAPI`) exposing the same resource tree with `await`.
+Every client has an `Async` counterpart (`Asyncfathom`) exposing the same resource tree with `await`.
 
 ```python
 import asyncio
 
-from fathom_analytics import AsyncFathomAnalyticsAPI
+from fathom_analytics import Asyncfathom
 
 
 async def main() -> None:
-    client = AsyncFathomAnalyticsAPI()
+    client = Asyncfathom()
     await client.account.list()
 
 
@@ -107,9 +107,9 @@ Documented error statuses: `400`, `401`, `410`.
 Configure the generated client by setting any of these options when you create it.
 
 ```python
-from fathom_analytics import FathomAnalyticsAPI
+from fathom_analytics import fathom
 
-client = FathomAnalyticsAPI(
+client = fathom(
     timeout=60.0,
     max_retries=2,
 )

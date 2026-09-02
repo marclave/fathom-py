@@ -23,7 +23,7 @@ from ._types import (
 )
 from ._utils import is_given, is_mapping_t, get_async_library
 from ._compat import cached_property
-from ._exceptions import APIStatusError, FathomAnalyticsAPIError
+from ._exceptions import APIStatusError, fathomError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -44,19 +44,10 @@ if TYPE_CHECKING:
 # threads cannot deadlock on CPython import locks (see CPython 3.14).
 _RESOURCE_IMPORT_LOCK = threading.RLock()
 
-__all__ = [
-    "FathomAnalyticsAPI",
-    "AsyncFathomAnalyticsAPI",
-    "Client",
-    "AsyncClient",
-    "Timeout",
-    "Transport",
-    "ProxiesTypes",
-    "RequestOptions",
-]
+__all__ = ["fathom", "Asyncfathom", "Client", "AsyncClient", "Timeout", "Transport", "ProxiesTypes", "RequestOptions"]
 
 
-class FathomAnalyticsAPI(SyncAPIClient):
+class fathom(SyncAPIClient):
     # client options
     bearer_auth: str
 
@@ -83,7 +74,7 @@ class FathomAnalyticsAPI(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous FathomAnalyticsAPI client instance.
+        """Construct a new synchronous fathom client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `bearer_auth` from `BEARER_AUTH`
@@ -91,7 +82,7 @@ class FathomAnalyticsAPI(SyncAPIClient):
         if bearer_auth is None:
             bearer_auth = os.environ.get("BEARER_AUTH")
         if bearer_auth is None:
-            raise FathomAnalyticsAPIError(
+            raise fathomError(
                 "The bearer_auth client option must be set either by passing bearer_auth to the client or by setting the BEARER_AUTH environment variable"
             )
         self.bearer_auth = bearer_auth
@@ -151,12 +142,12 @@ class FathomAnalyticsAPI(SyncAPIClient):
         return ReportsResource(self)
 
     @cached_property
-    def with_raw_response(self) -> FathomAnalyticsAPIWithRawResponse:
-        return FathomAnalyticsAPIWithRawResponse(self)
+    def with_raw_response(self) -> fathomWithRawResponse:
+        return fathomWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> FathomAnalyticsAPIWithStreamedResponse:
-        return FathomAnalyticsAPIWithStreamedResponse(self)
+    def with_streaming_response(self) -> fathomWithStreamedResponse:
+        return fathomWithStreamedResponse(self)
 
     @property
     @override
@@ -277,7 +268,7 @@ class FathomAnalyticsAPI(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncFathomAnalyticsAPI(AsyncAPIClient):
+class Asyncfathom(AsyncAPIClient):
     # client options
     bearer_auth: str
 
@@ -304,7 +295,7 @@ class AsyncFathomAnalyticsAPI(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async AsyncFathomAnalyticsAPI client instance.
+        """Construct a new async Asyncfathom client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `bearer_auth` from `BEARER_AUTH`
@@ -312,7 +303,7 @@ class AsyncFathomAnalyticsAPI(AsyncAPIClient):
         if bearer_auth is None:
             bearer_auth = os.environ.get("BEARER_AUTH")
         if bearer_auth is None:
-            raise FathomAnalyticsAPIError(
+            raise fathomError(
                 "The bearer_auth client option must be set either by passing bearer_auth to the client or by setting the BEARER_AUTH environment variable"
             )
         self.bearer_auth = bearer_auth
@@ -372,12 +363,12 @@ class AsyncFathomAnalyticsAPI(AsyncAPIClient):
         return AsyncReportsResource(self)
 
     @cached_property
-    def with_raw_response(self) -> AsyncFathomAnalyticsAPIWithRawResponse:
-        return AsyncFathomAnalyticsAPIWithRawResponse(self)
+    def with_raw_response(self) -> AsyncfathomWithRawResponse:
+        return AsyncfathomWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncFathomAnalyticsAPIWithStreamedResponse:
-        return AsyncFathomAnalyticsAPIWithStreamedResponse(self)
+    def with_streaming_response(self) -> AsyncfathomWithStreamedResponse:
+        return AsyncfathomWithStreamedResponse(self)
 
     @property
     @override
@@ -498,10 +489,10 @@ class AsyncFathomAnalyticsAPI(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class FathomAnalyticsAPIWithRawResponse:
-    _client: FathomAnalyticsAPI
+class fathomWithRawResponse:
+    _client: fathom
 
-    def __init__(self, client: FathomAnalyticsAPI) -> None:
+    def __init__(self, client: fathom) -> None:
         self._client = client
 
     @cached_property
@@ -535,10 +526,10 @@ class FathomAnalyticsAPIWithRawResponse:
         return ReportsResourceWithRawResponse(self._client.reports)
 
 
-class AsyncFathomAnalyticsAPIWithRawResponse:
-    _client: AsyncFathomAnalyticsAPI
+class AsyncfathomWithRawResponse:
+    _client: Asyncfathom
 
-    def __init__(self, client: AsyncFathomAnalyticsAPI) -> None:
+    def __init__(self, client: Asyncfathom) -> None:
         self._client = client
 
     @cached_property
@@ -572,10 +563,10 @@ class AsyncFathomAnalyticsAPIWithRawResponse:
         return AsyncReportsResourceWithRawResponse(self._client.reports)
 
 
-class FathomAnalyticsAPIWithStreamedResponse:
-    _client: FathomAnalyticsAPI
+class fathomWithStreamedResponse:
+    _client: fathom
 
-    def __init__(self, client: FathomAnalyticsAPI) -> None:
+    def __init__(self, client: fathom) -> None:
         self._client = client
 
     @cached_property
@@ -609,10 +600,10 @@ class FathomAnalyticsAPIWithStreamedResponse:
         return ReportsResourceWithStreamingResponse(self._client.reports)
 
 
-class AsyncFathomAnalyticsAPIWithStreamedResponse:
-    _client: AsyncFathomAnalyticsAPI
+class AsyncfathomWithStreamedResponse:
+    _client: Asyncfathom
 
-    def __init__(self, client: AsyncFathomAnalyticsAPI) -> None:
+    def __init__(self, client: Asyncfathom) -> None:
         self._client = client
 
     @cached_property
@@ -647,5 +638,5 @@ class AsyncFathomAnalyticsAPIWithStreamedResponse:
 
 
 # Alias names for the documented `Client` / `AsyncClient` symbols.
-Client = FathomAnalyticsAPI
-AsyncClient = AsyncFathomAnalyticsAPI
+Client = fathom
+AsyncClient = Asyncfathom
