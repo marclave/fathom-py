@@ -8,13 +8,13 @@ from typing import TYPE_CHECKING
 import anyio
 
 if TYPE_CHECKING:
-    from ._client import FathomAnalyticsAPI, AsyncFathomAnalyticsAPI
+    from ._client import fathom, Asyncfathom
 
 
 class SyncAPIResource:
-    _client: FathomAnalyticsAPI
+    _client: fathom
 
-    def __init__(self, client: FathomAnalyticsAPI) -> None:
+    def __init__(self, client: fathom) -> None:
         self._client = client
         self._get = client.get
         self._post = client.post
@@ -28,9 +28,9 @@ class SyncAPIResource:
 
 
 class AsyncAPIResource:
-    _client: AsyncFathomAnalyticsAPI
+    _client: Asyncfathom
 
-    def __init__(self, client: AsyncFathomAnalyticsAPI) -> None:
+    def __init__(self, client: Asyncfathom) -> None:
         self._client = client
         self._get = client.get
         self._post = client.post

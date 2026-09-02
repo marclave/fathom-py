@@ -20,11 +20,11 @@ __all__ = [
 ]
 
 
-class FathomAnalyticsAPIError(Exception):
+class fathomError(Exception):
     pass
 
 
-class APIError(FathomAnalyticsAPIError):
+class APIError(fathomError):
     message: str
     request: httpx.Request
 
@@ -110,7 +110,7 @@ class InternalServerError(APIStatusError):
     pass
 
 
-class WebSocketConnectionClosedError(FathomAnalyticsAPIError):
+class WebSocketConnectionClosedError(fathomError):
     """Raised when a WebSocket connection closes with unsent messages."""
 
     unsent_messages: list[str]
@@ -120,7 +120,7 @@ class WebSocketConnectionClosedError(FathomAnalyticsAPIError):
         self.unsent_messages = unsent_messages
 
 
-class WebSocketQueueFullError(FathomAnalyticsAPIError):
+class WebSocketQueueFullError(fathomError):
     """Raised when the outgoing WebSocket message queue exceeds its byte-size limit."""
 
     pass
